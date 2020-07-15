@@ -40,10 +40,16 @@ services:
         source: ./logstash/pipeline
         target: /usr/share/logstash/pipeline
         read_only: true
+      - type: bind
+        source: ./logstash/patterns.d
+        target: /usr/share/logstash/patterns.d
+        read_only: true
     ports:
       - "5000:5000/tcp"
       - "5000:5000/udp"
       - "9600:9600"
+      - "5044:5044/tcp"
+      - "5044:5044/udp"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
